@@ -1,0 +1,15 @@
+/home/kali/Documents/radium/cyber_weapons/RAT/bin/Debug/net6.0/RAT
+/home/kali/Documents/radium/cyber_weapons/RAT/bin/Debug/net6.0/RAT.deps.json
+/home/kali/Documents/radium/cyber_weapons/RAT/bin/Debug/net6.0/RAT.runtimeconfig.json
+/home/kali/Documents/radium/cyber_weapons/RAT/bin/Debug/net6.0/RAT.dll
+/home/kali/Documents/radium/cyber_weapons/RAT/bin/Debug/net6.0/RAT.pdb
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.csproj.AssemblyReference.cache
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.GeneratedMSBuildEditorConfig.editorconfig
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.AssemblyInfoInputs.cache
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.AssemblyInfo.cs
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.csproj.CoreCompileInputs.cache
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.dll
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/refint/RAT.dll
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.pdb
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/RAT.genruntimeconfig.cache
+/home/kali/Documents/radium/cyber_weapons/RAT/obj/Debug/net6.0/ref/RAT.dll

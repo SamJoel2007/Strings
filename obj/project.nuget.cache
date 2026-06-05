@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "D7tkgAUusSokD2RpmH4QiC9FWpPQMJDfURIcawkrwLdr5l0mwQuhykThfpg+tbpLqk8HIyxKWfWpCKUjNyCYZQ==",
+  "success": true,
+  "projectFilePath": "/home/kali/Documents/radium/cyber_weapons/RAT/RAT.csproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/microsoft.netcore.app.ref/6.0.8/microsoft.netcore.app.ref.6.0.8.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.8/microsoft.aspnetcore.app.ref.6.0.8.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.8/microsoft.netcore.app.host.linux-x64.6.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
