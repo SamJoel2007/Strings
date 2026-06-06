@@ -79,8 +79,11 @@ while (true) {
 	generate_rat(target_name, file, cmd);
 	// GENERATES THE MOVER FILE
 	generate_mover(file, target_name);
+	// SAVES CHANGES AND SET THE TARGET
+	push_changes();
 	
     } else if (opn == "2") {
+    	shell_exec("ls");
 
     } else if (opn == "3") {
 
